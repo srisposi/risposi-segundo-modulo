@@ -1,5 +1,7 @@
 import streamlit as st
 import pandas as pd
+import plotly.express as px
+import plotly.graph_objects as go
 from sqlalchemy import create_engine
 
 # Configuración de Streamlit
@@ -114,3 +116,16 @@ try:
             hover_data=['supplier_name', 'location']
         )
         st.plotly_chart(fig2, use_container_width=True)
+
+
+    # Gráfico de líneas: Tendencias por ubicación
+    st.subheader("📈 Tendencias por Ubicación")
+    trends_data = filtered_df.groupby(['location', 'product_type'])['revenue_generated'].sum().reset_index()
+    fig3 = px.line(
+        trends_data, 
+        x='location', 
+        y='revenue_generated',
+        color='product_type',
+        title="Revenue por Ubicación y Tipo de Producto"
+    )
+    st.plotly_chart(fig3, use_container_width=True)
