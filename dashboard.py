@@ -129,3 +129,29 @@ try:
         title="Revenue por Ubicación y Tipo de Producto"
     )
     st.plotly_chart(fig3, use_container_width=True)
+
+    # Análisis de proveedores
+    col1, col2 = st.columns(2)
+    
+    with col1:
+        # Top proveedores por revenue
+        top_suppliers = filtered_df.groupby('supplier_name')['revenue_generated'].sum().sort_values(ascending=False).head(10)
+        fig4 = px.bar(
+            x=top_suppliers.values,
+            y=top_suppliers.index,
+            orientation='h',
+            title="Top 10 Proveedores por Revenue"
+        )
+        fig4.update_layout(yaxis={'categoryorder':'total ascending'})
+        st.plotly_chart(fig4, use_container_width=True)
+    
+    with col2:
+        # Análisis de costos de transporte
+        transport_costs = filtered_df.groupby('transportation_modes')['shipping_costs'].mean().reset_index()
+        fig5 = px.pie(
+            transport_costs,
+            values='shipping_costs',
+            names='transportation_modes',
+            title="Distribución de Costos por Modo de Transporte"
+        )
+        st.plotly_chart(fig5, use_container_width=True)
