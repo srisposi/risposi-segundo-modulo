@@ -43,3 +43,11 @@ try:
         default=product_types
     )
 
+    # Filtro por ubicación
+    locations = df['location'].unique()
+    selected_locations = st.sidebar.multiselect(
+        "Ubicación",
+        locations,
+        default=locations
+    )
+
