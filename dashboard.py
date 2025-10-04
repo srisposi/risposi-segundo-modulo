@@ -58,4 +58,11 @@ try:
         suppliers,
         default=suppliers
     )
+    
+    # Aplicar filtros
+    filtered_df = df[
+        (df['product_type'].isin(selected_products)) &
+        (df['location'].isin(selected_locations)) &
+        (df['supplier_name'].isin(selected_suppliers))
+    ]
 
