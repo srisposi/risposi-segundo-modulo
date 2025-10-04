@@ -66,3 +66,23 @@ try:
         (df['supplier_name'].isin(selected_suppliers))
     ]
 
+    # Métricas principales
+    col1, col2, col3, col4 = st.columns(4)
+    
+    with col1:
+        total_revenue = filtered_df['revenue_generated'].sum()
+        st.metric("Revenue Total", f"${total_revenue:,.2f}")
+    
+    with col2:
+        total_products = filtered_df['number_of_products_sold'].sum()
+        st.metric("Productos Vendidos", f"{total_products:,}")
+    
+    with col3:
+        avg_price = filtered_df['price'].mean()
+        st.metric("Precio Promedio", f"${avg_price:.2f}")
+    
+    with col4:
+        defect_rate = filtered_df['defect_rates'].mean()
+        st.metric("Tasa de Defectos", f"{defect_rate:.2%}")
+    
+    st.markdown("---")
