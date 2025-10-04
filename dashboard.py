@@ -2,14 +2,7 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
-from sqlalchemy import create_engine
-
-# Configuración de Streamlit
-st.set_page_config(
-    page_title="Supply Chain Dashboard",
-    page_icon="📊",
-    layout="wide"
-)
+from sqlalchemy import create_engine, text
 
 # Configuración de la página
 st.set_page_config(
@@ -44,7 +37,7 @@ try:
         product_types,
         default=product_types
     )
-
+    
     # Filtro por ubicación
     locations = df['location'].unique()
     selected_locations = st.sidebar.multiselect(
@@ -52,7 +45,7 @@ try:
         locations,
         default=locations
     )
-
+    
     # Filtro por proveedor
     suppliers = df['supplier_name'].unique()
     selected_suppliers = st.sidebar.multiselect(
@@ -67,7 +60,7 @@ try:
         (df['location'].isin(selected_locations)) &
         (df['supplier_name'].isin(selected_suppliers))
     ]
-
+    
     # Métricas principales
     col1, col2, col3, col4 = st.columns(4)
     
@@ -116,10 +109,9 @@ try:
             hover_data=['supplier_name', 'location']
         )
         st.plotly_chart(fig2, use_container_width=True)
-
-
+    
     # Gráfico de líneas: Tendencias por ubicación
-    st.subheader("📈 Tendencias por Ubicación")
+    st.subheader("Tendencias por Ubicación")
     trends_data = filtered_df.groupby(['location', 'product_type'])['revenue_generated'].sum().reset_index()
     fig3 = px.line(
         trends_data, 
@@ -129,7 +121,7 @@ try:
         title="Revenue por Ubicación y Tipo de Producto"
     )
     st.plotly_chart(fig3, use_container_width=True)
-
+    
     # Análisis de proveedores
     col1, col2 = st.columns(2)
     
@@ -155,3 +147,24 @@ try:
             title="Distribución de Costos por Modo de Transporte"
         )
         st.plotly_chart(fig5, use_container_width=True)
+    
+    # Tabla de datos
+    st.subheader("Datos Detallados")
+    st.dataframe(
+        filtered_df[['sku', 'product_type', 'price', 'revenue_generated', 'supplier_name', 'location', 'defect_rates']],
+        use_container_width=True
+    )
+    
+    # Información del dataset
+    st.sidebar.markdown("---")
+    st.sidebar.markdown("**Información del Dataset**")
+    st.sidebar.write(f"Total registros: {len(df)}")
+    st.sidebar.write(f"Registros filtrados: {len(filtered_df)}")
+    st.sidebar.write(f"Tipos de producto: {len(product_types)}")
+    st.sidebar.write(f"Ubicaciones: {len(locations)}")
+    st.sidebar.write(f"Proveedores: {len(suppliers)}")
+
+except Exception as e:
+    st.error(f"Error al cargar los datos: {str(e)}")
+    st.info("Asegúrate de que la base de datos existe y contiene datos. Ejecuta primero: python src/load_database_sqlite.py")
+
