@@ -86,3 +86,31 @@ try:
         st.metric("Tasa de Defectos", f"{defect_rate:.2%}")
     
     st.markdown("---")
+    
+    # Gráficos principales
+    col1, col2 = st.columns(2)
+    
+    with col1:
+        # Gráfico de barras: Revenue por tipo de producto
+        revenue_by_type = filtered_df.groupby('product_type')['revenue_generated'].sum().reset_index()
+        fig1 = px.bar(
+            revenue_by_type, 
+            x='product_type', 
+            y='revenue_generated',
+            title="Revenue por Tipo de Producto",
+            color='product_type'
+        )
+        fig1.update_layout(showlegend=False)
+        st.plotly_chart(fig1, use_container_width=True)
+    
+    with col2:
+        # Gráfico de dispersión: Precio vs Defectos
+        fig2 = px.scatter(
+            filtered_df, 
+            x='price', 
+            y='defect_rates',
+            color='product_type',
+            title="Precio vs Tasa de Defectos",
+            hover_data=['supplier_name', 'location']
+        )
+        st.plotly_chart(fig2, use_container_width=True)
