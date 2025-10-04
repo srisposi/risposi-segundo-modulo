@@ -51,3 +51,11 @@ try:
         default=locations
     )
 
+    # Filtro por proveedor
+    suppliers = df['supplier_name'].unique()
+    selected_suppliers = st.sidebar.multiselect(
+        "Proveedor",
+        suppliers,
+        default=suppliers
+    )
+
