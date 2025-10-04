@@ -1,10 +1,14 @@
-greenlet==3.2.4
-numpy==2.3.3
+# Core dependencies
 pandas==2.3.3
+sqlalchemy==2.0.43
 psycopg2-binary==2.9.10
+
+# Dashboard dependencies
+streamlit==1.50.0
+plotly==6.3.1
+
+# Supporting libraries
+numpy==2.3.3
 python-dateutil==2.9.0.post0
 pytz==2025.2
-six==1.17.0
-SQLAlchemy==2.0.43
 typing_extensions==4.15.0
-tzdata==2025.2
