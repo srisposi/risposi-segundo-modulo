@@ -72,24 +72,28 @@ git clone https://github.com/srisposi/risposi-segundo-modulo
 cd risposi-segundo-modulo
 ```
 
-### 2. Crear Entorno Virtual
+### Opción 1: Configuración Automática (Recomendada)
 ```bash
+# Configuración completa automática
+./setup.sh
+
+# Ejecutar dashboard
+./run_dashboard.sh
+```
+
+### Opción 2: Configuración Manual
+```bash
+# 2. Crear Entorno Virtual
 python3 -m venv venv
 source venv/bin/activate  # En Windows: venv\Scripts\activate
-```
 
-### 3. Instalar Dependencias
-```bash
+# 3. Instalar Dependencias
 pip install -r requirements.txt
-```
 
-### 4. Cargar Datos en la Base de Datos
-```bash
+# 4. Cargar Datos en la Base de Datos
 python src/load_database_sqlite.py
-```
 
-### 5. Ejecutar Dashboard
-```bash
+# 5. Ejecutar Dashboard
 streamlit run dashboard.py
 ```
 
@@ -102,6 +106,8 @@ risposi-segundo-modulo/
 ├── README.md                    # Documentación del proyecto
 ├── requirements.txt             # Dependencias de Python
 ├── .gitignore                  # Archivos a ignorar en Git
+├── setup.sh                    # Script de configuración automática
+├── run_dashboard.sh            # Script de ejecución del dashboard
 ├── dashboard.py                # Dashboard principal
 ├── data/
 │   ├── supply_chain_data.csv   # Datos originales
@@ -113,6 +119,15 @@ risposi-segundo-modulo/
 ```
 
 ## Scripts Disponibles
+
+### Scripts de Automatización
+- **`setup.sh`**: Configuración automática completa del proyecto
+  - Crea entorno virtual
+  - Instala dependencias
+  - Carga datos en la base de datos
+- **`run_dashboard.sh`**: Ejecución simplificada del dashboard
+  - Verifica configuración
+  - Ejecuta dashboard automáticamente
 
 ### Carga de Datos
 - **`src/load_database_sqlite.py`**: Carga datos en SQLite (recomendado)
