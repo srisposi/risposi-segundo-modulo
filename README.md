@@ -108,24 +108,6 @@ risposi-segundo-modulo/
 - **Ubicación**: Mumbai, Kolkata, Delhi, Bangalore
 - **Proveedor**: Supplier 1-5
 
-## Desarrollo
-
-### Agregar Nuevas Visualizaciones
-1. Editar `dashboard.py`
-2. Agregar nueva sección con `st.subheader()`
-3. Crear gráfico con Plotly
-4. Usar `st.plotly_chart()` para mostrar
-
-### Modificar Filtros
-1. Editar sección de sidebar en `dashboard.py`
-2. Agregar nuevos filtros con `st.multiselect()`
-3. Aplicar filtros al DataFrame
-
-### Agregar Métricas
-1. Calcular nueva métrica
-2. Mostrar con `st.metric()`
-3. Agregar en sección de KPIs
-
 ## Solución de Problemas
 
 ### Error: "No module named 'streamlit'"
@@ -143,31 +125,3 @@ python src/load_database_sqlite.py
 ```bash
 streamlit run dashboard.py --server.port 8502
 ```
-
-## Próximas Mejoras
-
-- [ ] Agregar análisis de tendencias temporales
-- [ ] Implementar alertas automáticas
-- [ ] Exportar reportes en PDF
-- [ ] Integración con APIs externas
-- [ ] Dashboard móvil responsive
-
-## Contribución
-
-1. Fork el proyecto
-2. Crear rama para nueva feature (`git checkout -b feature/nueva-feature`)
-3. Commit cambios (`git commit -am 'Agregar nueva feature'`)
-4. Push a la rama (`git push origin feature/nueva-feature`)
-5. Crear Pull Request
-
-## Licencia
-
-Este proyecto está bajo la Licencia MIT. Ver `LICENSE` para más detalles.
-
-## Contacto
-
-Para preguntas o soporte, contactar a: [tu-email@ejemplo.com]
-
----
-
-**Nota**: Este proyecto fue desarrollado como parte del segundo módulo de Programación Avanzada.
