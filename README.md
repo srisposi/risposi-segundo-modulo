@@ -27,6 +27,39 @@ Este proyecto implementa un sistema completo de análisis de datos de supply cha
 - **Limpieza automática** de datos en cada ejecución
 - **Esquema optimizado** para análisis
 
+Cabe destacar que se penso inicialmente trabajar con postgresSQL por eso figura como opcional pensando en un caso productivo. Su instalación y manejo generalmente se realizan mediante un entorno virtual pero también se puede realizar mediante instalación local. Para el caso que se trabaje con Postgres de está manera se dejando los pasos de instalación en Linux para poder trabajar con la misma:
+
+### Solo como referencia si se quiere utilizar PostgresSQL
+
+4.1 Se instala el PostgresSQL Server y Client
+```
+sudo apt update
+sudo apt install postgresql postgresql-contrib postgresql-client
+```
+4.2 Start PostgresSQL Service
+```
+sudo systemctl start postgresql
+sudo systemctl enable postgresql
+```
+4.3 Set up PostgresSQL usuario y base de datos
+```
+# Switch to postgres user
+sudo -u postgres psql
+
+# In the PostgreSQL prompt, run:
+CREATE DATABASE supply_chain_db;
+CREATE USER postgres WITH ENCRYPTED PASSWORD 'your_password_here';
+GRANT ALL PRIVILEGES ON DATABASE supply_chain_db TO postgres;
+\
+```
+
+```psql -U postgres
+CREATE DATABASE supply_chain_db;
+\q
+```
+
+Además la parte de limpieza de base de datos y optimización mencionada se realizan en los script que incluye el proyecto.
+
 ## Instalación y Configuración
 
 ### Prerrequisitos
@@ -35,7 +68,7 @@ Este proyecto implementa un sistema completo de análisis de datos de supply cha
 
 ### 1. Clonar el Repositorio
 ```bash
-git clone <url-del-repositorio>
+git clone https://github.com/srisposi/risposi-segundo-modulo
 cd risposi-segundo-modulo
 ```
 
